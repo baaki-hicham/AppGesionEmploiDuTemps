@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+{% block title %}Créneaux{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3">Créneaux</h1>
+        <p class="text-muted">Gérez les créneaux horaires disponibles.</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('creneaux.create') }}">Ajouter</a>
+</div>
+<div class="card shadow-sm border-0 p-3 mb-4">
+    <form method="get" class="row g-3">
+        <div class="col-md-8">
+            <input name="q" value="{{ query }}" placeholder="Recherche..." class="form-control">
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-outline-primary">Rechercher</button>
+        </div>
+    </form>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Jour</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for creneau in creneaux %}
+                <tr>
+                    <td>{{ creneau.id }}</td>
+                    <td>{{ creneau.jour }}</td>
+                    <td>{{ creneau.heure_debut }}</td>
+                    <td>{{ creneau.heure_fin }}</td>
+                    <td>
+                        <a href="{{ url_for('creneaux.edit', creneau_id=creneau.id) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                        <form method="post" action="{{ url_for('creneaux.delete', creneau_id=creneau.id) }}" class="d-inline" onsubmit="return confirm('Supprimer ce créneau ?');">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-sm btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

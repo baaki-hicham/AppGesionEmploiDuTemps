@@ -1,0 +1,20 @@
+<aside class="sidebar bg-white shadow-sm">
+    <div class="sidebar-header p-4 border-bottom">
+        <h3 class="fw-bold text-primary">Emploi du Temps</h3>
+        <p class="text-muted small">Administration</p>
+    </div>
+    <nav class="nav flex-column p-3">
+        <a class="nav-link text-secondary" href="{{ url_for('dashboard.index') }}"><i class="bi bi-speedometer2 me-2"></i>Dashboard</a>
+        <a class="nav-link text-secondary" href="{{ url_for('enseignants.index') }}"><i class="bi bi-person-lines-fill me-2"></i>Enseignants</a>
+        <a class="nav-link text-secondary" href="{{ url_for('classes.index') }}"><i class="bi bi-people-fill me-2"></i>Classes</a>
+        <a class="nav-link text-secondary" href="{{ url_for('matieres.index') }}"><i class="bi bi-book-half me-2"></i>Matieres</a>
+        <a class="nav-link text-secondary" href="{{ url_for('salles.index') }}"><i class="bi bi-building me-2"></i>Salles</a>
+        <a class="nav-link text-secondary" href="{{ url_for('creneaux.index') }}"><i class="bi bi-clock me-2"></i>Créneaux</a>
+        <a class="nav-link text-secondary" href="{{ url_for('seances.index') }}"><i class="bi bi-calendar-event me-2"></i>Séances</a>
+        <a class="nav-link text-secondary" href="{{ url_for('schedule.index') }}"><i class="bi bi-layout-text-window me-2"></i>Emplois du temps</a>
+        <a class="nav-link text-secondary" href="{{ url_for('conflicts.index') }}"><i class="bi bi-exclamation-triangle-fill me-2"></i>Conflits</a>
+        <a class="nav-link text-secondary" href="{{ url_for('exports.excel') }}"><i class="bi bi-file-earmark-spreadsheet-fill me-2"></i>Exporter Excel</a>
+        <a class="nav-link text-secondary" href="{{ url_for('exports.pdf') }}"><i class="bi bi-file-earmark-pdf-fill me-2"></i>Exporter PDF</a>
+        <a class="nav-link text-secondary" href="{{ url_for('auth.logout') }}"><i class="bi bi-box-arrow-right me-2"></i>Déconnexion</a>
+    </nav>
+</aside>

@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %}Modifier Enseignant{% endblock %}
+{% block content %}
+<div class="card shadow-sm border-0 p-4">
+    <h1 class="h3 mb-4">Modifier l enseignant</h1>
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Nom</label>
+                <input name="nom" value="{{ enseignant.nom }}" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Prénom</label>
+                <input name="prenom" value="{{ enseignant.prenom }}" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input name="email" type="email" value="{{ enseignant.email }}" class="form-control" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Téléphone</label>
+                <input name="telephone" value="{{ enseignant.telephone }}" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Spécialité</label>
+                <input name="specialite" value="{{ enseignant.specialite }}" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Disponibilité</label>
+                <input name="disponibilite" value="{{ enseignant.disponibilite }}" class="form-control">
+            </div>
+        </div>
+        <div class="mt-4">
+            <button class="btn btn-primary">Sauvegarder</button>
+            <a href="{{ url_for('enseignants.index') }}" class="btn btn-outline-secondary">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block title %}Ajouter Séance{% endblock %}
+{% block content %}
+<div class="card shadow-sm border-0 p-4">
+    <h1 class="h3 mb-4">Ajouter une séance</h1>
+    <form method="post" class="row g-3">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="col-md-4">
+            <label class="form-label">Classe</label>
+            <select name="classe_id" class="form-select" required>
+                {% for classe in classes %}
+                    <option value="{{ classe.id }}">{{ classe.nom }} - {{ classe.niveau }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Enseignant</label>
+            <select name="enseignant_id" class="form-select" required>
+                {% for enseignant in enseignants %}
+                    <option value="{{ enseignant.id }}">{{ enseignant.nom }} {{ enseignant.prenom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Matière</label>
+            <select name="matiere_id" class="form-select" required>
+                {% for matiere in matieres %}
+                    <option value="{{ matiere.id }}">{{ matiere.nom }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Salle</label>
+            <select name="salle_id" class="form-select" required>
+                {% for salle in salles %}
+                    <option value="{{ salle.id }}">{{ salle.nom }} ({{ salle.capacite }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Créneau</label>
+            <select name="creneau_id" class="form-select" required>
+                {% for creneau in creneaux %}
+                    <option value="{{ creneau.id }}">{{ creneau.jour }} {{ creneau.heure_debut }}-{{ creneau.heure_fin }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary">Enregistrer</button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('seances.index') }}">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

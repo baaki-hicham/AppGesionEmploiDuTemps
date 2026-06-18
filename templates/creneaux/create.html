@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Ajouter Créneau{% endblock %}
+{% block content %}
+<div class="card shadow-sm border-0 p-4">
+    <h1 class="h3 mb-4">Ajouter un créneau</h1>
+    <form method="post" class="row g-3">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="col-md-4">
+            <label class="form-label">Jour</label>
+            <input name="jour" class="form-control" required>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Heure début</label>
+            <input name="heure_debut" class="form-control" placeholder="08:00" required>
+        </div>
+        <div class="col-md-4">
+            <label class="form-label">Heure fin</label>
+            <input name="heure_fin" class="form-control" placeholder="10:00" required>
+        </div>
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary">Enregistrer</button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('creneaux.index') }}">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

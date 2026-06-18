@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Modifier Salle{% endblock %}
+{% block content %}
+<div class="card shadow-sm border-0 p-4">
+    <h1 class="h3 mb-4">Modifier la salle</h1>
+    <form method="post" class="row g-3">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="col-md-6">
+            <label class="form-label">Nom</label>
+            <input name="nom" value="{{ salle.nom }}" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Type</label>
+            <input name="type" value="{{ salle.type }}" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Capacité</label>
+            <input name="capacite" type="number" value="{{ salle.capacite }}" class="form-control" required>
+        </div>
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary">Sauvegarder</button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('salles.index') }}">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

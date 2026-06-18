@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Ajouter Classe{% endblock %}
+{% block content %}
+<div class="card shadow-sm border-0 p-4">
+    <h1 class="h3 mb-4">Ajouter une classe</h1>
+    <form method="post" class="row g-3">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="col-md-6">
+            <label class="form-label">Nom</label>
+            <input name="nom" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Niveau</label>
+            <input name="niveau" class="form-control" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Effectif</label>
+            <input name="effectif" type="number" class="form-control" required>
+        </div>
+        <div class="col-12 mt-3">
+            <button class="btn btn-primary">Enregistrer</button>
+            <a class="btn btn-outline-secondary" href="{{ url_for('classes.index') }}">Annuler</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

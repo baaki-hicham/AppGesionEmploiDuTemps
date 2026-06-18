@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3">Tableau de bord</h1>
+        <p class="text-muted">Vue synthétique des indicateurs clés.</p>
+    </div>
+    <a href="{{ url_for('schedule.generate') }}" class="btn btn-primary">Générer l'emploi du temps</a>
+</div>
+<div class="row g-4">
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 p-4">
+            <h6 class="text-uppercase text-muted">Enseignants</h6>
+            <h2 class="fw-bold">{{ stats.enseignants }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 p-4">
+            <h6 class="text-uppercase text-muted">Classes</h6>
+            <h2 class="fw-bold">{{ stats.classes }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 p-4">
+            <h6 class="text-uppercase text-muted">Matières</h6>
+            <h2 class="fw-bold">{{ stats.matieres }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 p-4">
+            <h6 class="text-uppercase text-muted">Salles</h6>
+            <h2 class="fw-bold">{{ stats.salles }}</h2>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 p-4">
+            <h6 class="text-uppercase text-muted">Séances</h6>
+            <h2 class="fw-bold">{{ stats.seances }}</h2>
+        </div>
+    </div>
+</div>
+<div class="row g-4 mt-4">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 p-4">
+            <h5>Occupation des salles</h5>
+            <canvas id="salleChart"></canvas>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0 p-4">
+            <h5>Occupation des enseignants</h5>
+            <canvas id="enseignantChart"></canvas>
+        </div>
+    </div>
+</div>
+<div class="row g-4 mt-4">
+    <div class="col-12">
+        <div class="card shadow-sm border-0 p-4">
+            <h5>Volume horaire par matière</h5>
+            <canvas id="matiereChart"></canvas>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script>
+const salleData = {{ chart_data.salles | tojson }};
+const enseignantData = {{ chart_data.enseignants | tojson }};
+const matiereData = {{ chart_data.matieres | tojson }};
+function initChart(selector, labels, values, color) {
+    const ctx = document.getElementById(selector);
+    if (!ctx) return;
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels,
+            datasets: [{ label: 'Valeur', data: values, backgroundColor: color }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+    });
+}
+initChart('salleChart', salleData.map(item => item.salle), salleData.map(item => item.occupation), '#2563EB');
+initChart('enseignantChart', enseignantData.map(item => item.enseignant), enseignantData.map(item => item.cours), '#16A34A');
+initChart('matiereChart', matiereData.map(item => item.matiere), matiereData.map(item => item.volume), '#F97316');
+</script>
+{% endblock %}

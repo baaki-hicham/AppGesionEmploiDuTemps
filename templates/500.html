@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block title %}Erreur serveur{% endblock %}
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="display-4">500</h1>
+    <p class="lead">Une erreur interne est survenue.</p>
+    <a href="{{ url_for('dashboard.index') }}" class="btn btn-primary">Retour au tableau de bord</a>
+</div>
+{% endblock %}

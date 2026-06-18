@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %}Conflits{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3">Détection des conflits</h1>
+        <p class="text-muted">Analyse automatique des collisions de planning.</p>
+    </div>
+</div>
+<div class="row g-4">
+    {% for key, items in conflicts.items() %}
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 p-4">
+                <h5 class="text-danger text-uppercase">Conflit {{ key }}</h5>
+                {% if items %}
+                    <ul class="list-group list-group-flush">
+                        {% for seance, other in items %}
+                            <li class="list-group-item bg-light">
+                                {{ seance.classe.nom }} - {{ seance.matiere.nom }} avec {{ seance.enseignant.nom }} {{ seance.enseignant.prenom }}
+                                <br><small>{{ seance.creneau.jour }} {{ seance.creneau.heure_debut }}-{{ seance.creneau.heure_fin }}</small>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-success mb-0">Aucun conflit détecté.</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

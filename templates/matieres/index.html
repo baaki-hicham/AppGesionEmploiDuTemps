@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% block title %}Matières{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h3">Matières</h1>
+        <p class="text-muted">Gestion des matières et du volume horaire.</p>
+    </div>
+    <a class="btn btn-primary" href="{{ url_for('matieres.create') }}">Ajouter</a>
+</div>
+<div class="card shadow-sm border-0 p-3 mb-4">
+    <form method="get" class="row g-3">
+        <div class="col-md-8">
+            <input name="q" value="{{ query }}" placeholder="Recherche..." class="form-control">
+        </div>
+        <div class="col-md-4 text-end">
+            <button class="btn btn-outline-primary">Rechercher</button>
+        </div>
+    </form>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Volume horaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for matiere in matieres %}
+                <tr>
+                    <td>{{ matiere.id }}</td>
+                    <td>{{ matiere.nom }}</td>
+                    <td>{{ matiere.volume_horaire }}</td>
+                    <td>
+                        <a href="{{ url_for('matieres.edit', matiere_id=matiere.id) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                        <form method="post" action="{{ url_for('matieres.delete', matiere_id=matiere.id) }}" class="d-inline" onsubmit="return confirm('Supprimer cette matière ?');">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-sm btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% if pagination %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-end mt-3">
+        {% if pagination.has_prev %}
+            <li class="page-item"><a class="page-link" href="?page={{ pagination.prev_num }}&q={{ query }}">Précédent</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Précédent</span></li>
+        {% endif %}
+        <li class="page-item active"><span class="page-link">{{ pagination.page }}</span></li>
+        {% if pagination.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ pagination.next_num }}&q={{ query }}">Suivant</a></li>
+        {% else %}
+            <li class="page-item disabled"><span class="page-link">Suivant</span></li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}
