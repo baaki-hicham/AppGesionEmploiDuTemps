@@ -6,11 +6,11 @@
 
 **Année :** 2026
 
-**Membres du groupe :** _______________________________
+**Realise par :** BAAKI Hicham
 
-**Encadrant :** _______________________________
+**Encadrant :** MAMA Rachid
 
-**Établissement :** _______________________________
+**Établissement :** CRMEF SM-Annexe Agadir
 
 ---
 
